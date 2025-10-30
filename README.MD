@@ -1,58 +1,54 @@
-# Projeto: Extrator de Features HOG com Scikit-Image
+# 🎨 Projeto de Visão Computacional: Detector de Features HOG
 
-Este repositório contém um script Python que demonstra a extração de features **HOG (Histogram of Oriented Gradients)** de uma imagem usando a biblioteca `scikit-image`.
+E aí, galera! 👋 Esse é meu projeto da disciplina de Visão Computacional onde implementei um extrator de features HOG usando Python e a biblioteca scikit-image. Se você também está estudando VC, esse projeto vai te ajudar a entender melhor como funciona essa técnica massa!
 
-## 1. A Técnica: HOG (Histogram of Oriented Gradients)
+## 🤔 Mas o que é esse tal de HOG?
 
-O HOG é um *descritor de features* amplamente utilizado em visão computacional para a detecção de objetos. A técnica funciona da seguinte maneira:
+HOG (Histogram of Oriented Gradients) é uma técnica super importante em Visão Computacional que ajuda a detectar objetos em imagens. Basicamente, ele analisa como as bordas e texturas estão distribuídas na imagem. Deixa eu explicar de um jeito mais tranquilo:
 
-1.  **Calcula Gradientes:** A imagem é analisada para encontrar a magnitude (intensidade) e a orientação (direção) das mudanças de intensidade (bordas) em cada pixel.
-2.  **Divide em Células:** A imagem é dividida em pequenas regiões chamadas "células" (ex: 8x8 pixels).
-3.  **Cria Histogramas:** Para cada célula, é criado um histograma das orientações dos gradientes. Por exemplo, se uma célula tem muitas bordas verticais, o "bin" de 90 graus do histograma terá um valor alto.
-4.  **Normaliza Blocos:** Para tornar o descritor robusto a variações de iluminação, as células são agrupadas em "blocos" maiores (ex: 2x2 células). O histograma de cada bloco é normalizado.
-5.  **Vetor de Features:** Todos os histogramas normalizados dos blocos são concatenados para formar um único e longo vetor. Este vetor é a "assinatura" HOG da imagem, que pode ser usada para treinar modelos de Machine Learning (como um SVM) para reconhecer objetos.
+1. 📏 **Acha as Bordas:** Primeiro, ele procura onde tem mudanças na imagem (tipo quando você tem uma borda de um objeto)
+2. 🔲 **Divide a Imagem:** Quebra a imagem em pequenos quadradinhos de 8x8 pixels
+3. 📊 **Faz uns Histogramas:** Pra cada quadradinho, ele conta quantas bordas tem em cada direção
+4. ✨ **Normaliza os Dados:** Agrupa os quadradinhos em blocos maiores (2x2) pra não ter problema com iluminação
+5. 📝 **Cria um Vetor Final:** Junta tudo num vetor gigante que serve como uma "impressão digital" do objeto
 
-Em suma, o HOG captura a **estrutura local da forma e da textura** de um objeto, ignorando a cor e variações de iluminação.
+É tipo tirar as características mais importantes da imagem, saca? Isso é muito útil pra treinar uma IA pra reconhecer objetos depois!
 
-## 2. O que o Programa Faz
+## 💻 O que meu Código Faz?
 
-O script `extrair_features_hog.py` executa os seguintes passos:
+Fiz um script em Python (`extrair_features_hog.py`) que:
+1. Pega uma imagem que você escolher
+2. Transforma ela em preto e branco (porque o HOG funciona melhor assim)
+3. Roda o algoritmo HOG nela
+4. Mostra uma visualização maneira lado a lado: sua imagem original e como o HOG "vê" ela
+5. Salva o resultado e te mostra uns dados legais sobre as features que ele extraiu
 
-1.  **Carrega** uma imagem de entrada chamada `imagem_entrada.jpg` (que deve estar no mesmo diretório).
-2.  **Converte** a imagem para escala de cinza, que é o formato padrão para o cálculo do HOG.
-3.  **Calcula** as features HOG usando a função `skimage.feature.hog`.
-4.  **Gera** uma visualização que mostra a imagem original ao lado da representação visual das features HOG.
-5.  **Salva** essa visualização como `resultado_hog.png`.
-6.  **Imprime** no console as dimensões do vetor de features HOG extraído.
+## 🚀 Como Rodar
 
-## 3. Como Executar
+### 1. Preparando o Ambiente
+No Windows, abre o PowerShell e manda:
+```powershell
+# Cria um ambiente virtual Python
+python -m venv venv
 
-1.  **Clone este repositório:**
-    ```bash
-    git clone [URL-DO-SEU-REPOSITORIO]
-    cd [NOME-DO-SEU-REPOSITORIO]
-    ```
+# Ativa o ambiente (NO WINDOWS, É ESSE COMANDO AQUI ⬇️)
+.\venv\Scripts\activate
 
-2.  **Crie um ambiente virtual e instale as dependências:**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # No Windows: venv\Scripts\activate
-    pip install -r requirements.txt
-    ```
+# Instala as bibliotecas necessárias
+pip install -r requirements.txt
+```
 
-3.  **Adicione sua imagem:**
-    * Encontre uma imagem de sua preferência (ex: uma foto de um carro, pessoa ou animal) em sites como [Pexels](https://www.pexels.com) ou [Unsplash](https://www.unsplash.com).
-    * **Importante:** Salve esta imagem na raiz do projeto com o nome `imagem_entrada.jpg`. O script *não* funcionará sem ela.
+### 2. Coloca sua Imagem
+- Pega qualquer imagem legal (pode ser selfie, foto de pet, paisagem...)
+- ⚠️ **IMPORTANTE:** Salva como `imagem_entrada.jpg` na mesma pasta do código
 
-4.  **Execute o script:**
-    ```bash
-    python extrair_features_hog.py
-    ```
+### 3. Roda o Script
+```powershell
+python extrair_features_hog.py
+```
 
-## 4. Exemplo de Resultado
+## 🎉 Resultado
 
-Após a execução, um arquivo `resultado_hog.png` será gerado, mostrando a imagem original e sua representação HOG. A imagem HOG destaca as bordas e texturas que o algoritmo "enxergou".
-
-*(Você pode inserir aqui a imagem `resultado_hog.png` que o script irá gerar)*
-
-![Exemplo de Resultado HOG](resultado_hog.png)
+Depois que rodar, você vai ter um arquivo `resultado_hog.png` com duas imagens lado a lado:
+- Sua imagem original
+- Uma visualização style do HOG que parece um desenho artístico em preto e branco
