@@ -7,7 +7,7 @@ from skimage import io, color, exposure
 
 # --- Configuração ---
 # O nome do arquivo de imagem que você deve adicionar ao repositório
-IMAGE_FILENAME = 'imagem_entrada.jpg'
+IMAGE_FILENAME = 'carmel.jpg'
 RESULT_FILENAME = 'resultado_hog.png'
 # --------------------
 
